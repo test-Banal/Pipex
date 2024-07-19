@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 16:58:19 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:58:22 by aneumann         ###   ########.fr       */
+/*   Created: 2024/07/19 16:57:18 by aneumann          #+#    #+#             */
+/*   Updated: 2024/07/19 16:57:25 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	fn_path(char **res_split, char *argv)
+char	**ft_split(char const *s, char c)
 {
-	int	i;
+	char	**words;
+	int		count;
 
-	i = 0;
-	while (res_split[i])
+	if (!s)
+		return (NULL);
+	count = count_words(s, c);
+	if (count == 0)
 	{
-		res_split[i] = ft_strjoin(res_split[i], "/");
-		res_split[i] = ft_strjoin(res_split[i], argv);
-		i++;
+		words = (char **)malloc(1 * sizeof(char *));
+		if (!words)
+			return (NULL);
+		words[0] = NULL;
+		return (words);
 	}
+	return (main_split(s, c));
 }

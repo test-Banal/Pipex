@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:42:23 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:45:02 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/19 16:57:49 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,10 @@ typedef struct s_variables
 	int	cc;
 }				t_variables;
 
-int		ft_strlen(const char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strdup(const char *s1);
 char	*ft_substr(char const *s, int start, int len);
 int		ft_strncmp(const char *s1, const char *s2, int n);
 int		count_words(char const *s, char c);
 char	**main_split(char const *s, char c);
-char	**ft_split(char const *s, char c);
 void	fn_path(char **res_split, char *argv);
 char	*true_path(char *argv, char **env);
 void	close_all(t_variables *variables);

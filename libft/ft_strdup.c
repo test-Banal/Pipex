@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 16:58:19 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:58:22 by aneumann         ###   ########.fr       */
+/*   Created: 2024/07/19 16:52:25 by aneumann          #+#    #+#             */
+/*   Updated: 2024/07/19 16:54:35 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	fn_path(char **res_split, char *argv)
+char	*ft_strdup(const char *s1)
 {
-	int	i;
+	char	*str;
+	char	*arr;
+	int		i;
+	int		j;
 
+	str = (char *)s1;
+	j = fT_strlen(str);
+	arr = (char *)malloc(j + 1);
+	if (!arr)
+		return (NULL);
 	i = 0;
-	while (res_split[i])
+	while (i < j)
 	{
-		res_split[i] = ft_strjoin(res_split[i], "/");
-		res_split[i] = ft_strjoin(res_split[i], argv);
+		arr[i] = str[i];
 		i++;
 	}
+	arr[i] = '\0';
+	return (arr);
 }

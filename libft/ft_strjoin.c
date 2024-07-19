@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 16:58:19 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:58:22 by aneumann         ###   ########.fr       */
+/*   Created: 2024/07/19 16:56:31 by aneumann          #+#    #+#             */
+/*   Updated: 2024/07/19 16:56:52 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	fn_path(char **res_split, char *argv)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	i;
+	char	*arr;
+	int		i;
+	int		j;
+	int		step;
 
-	i = 0;
-	while (res_split[i])
-	{
-		res_split[i] = ft_strjoin(res_split[i], "/");
-		res_split[i] = ft_strjoin(res_split[i], argv);
-		i++;
-	}
+	if (!s1 || !s2)
+		return (NULL);
+	step = 0;
+	i = ft_strlen(s1);
+	j = ft_strlen(s2);
+	arr = (char *)malloc(i + j + 1);
+	if (!arr)
+		return (NULL);
+	while (*s1)
+		arr[step++] = *s1++;
+	while (*s2)
+		arr[step++] = *s2++;
+	arr[step] = '\0';
+	return (arr);
 }

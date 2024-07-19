@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 16:58:19 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:58:22 by aneumann         ###   ########.fr       */
+/*   Created: 2024/07/19 16:54:46 by aneumann          #+#    #+#             */
+/*   Updated: 2024/07/19 16:55:59 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	fn_path(char **res_split, char *argv)
+int	ft_strlen(const char *str)
 {
 	int	i;
 
-	i = 0;
-	while (res_split[i])
-	{
-		res_split[i] = ft_strjoin(res_split[i], "/");
-		res_split[i] = ft_strjoin(res_split[i], argv);
+	while (str[i] != '\0')
 		i++;
-	}
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:46:54 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 18:29:14 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:48:50 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ typedef struct s_variables
 	int	cc;
 }				t_variables;
 
-int	here_doc_check(char *argv);
+int		here_doc_check(char *argv);
 void	close_with_check(int fd);
 void	here_doc(t_variables *variables, char *lim);
 char	*path_finder(char **env);
 void	fn_path(char **res_split, char *argv);
 char	*true_path(char *argv, char **env);
 void	close_all(t_variables *variables);
-int	open_files_check(t_variables *variables, char **argv, int argc);
+int		open_files_check(t_variables *variables, char **argv, int argc);
 void	dup2_2(int first, int second, int third, int fourth);
 void	piping(t_variables *variables, char **argv, char **env, int i);
 void	do_pipes(t_variables *variables);

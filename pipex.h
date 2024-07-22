@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:42:23 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 18:29:28 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:49:17 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@ void	piping(t_variables *variables, char **argv, char **env, int i);
 void	dup2_check(int fd1, int fd2);
 void	size_check(int argc);
 void	open_files(t_variables *variables, char **argv, int argc);
-
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/22 18:51:15 by aneumann          #+#    #+#             */
+/*   Updated: 2024/07/22 18:51:44 by aneumann         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -13,16 +25,16 @@
 #  define BUFFER_SIZE 1042
 # endif
 
-void    ft_error(void);
+void	ft_error(void);
 char	*ft_substr(char const *s, int start, int len);
-int	count_words(char const *s, char c);
+int		count_words(char const *s, char c);
 char	**main_split(char const *s, char c);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
 char	*ft_strjoin(char const *s1, char const *s2);
-int	ft_strlen(const char *str);
-int	ft_strncmp(const char *s1, const char *s2, int n);
+int		ft_strlen(const char *str);
+int		ft_strncmp(const char *s1, const char *s2, int n);
 
 char	*ft_strchr_gnl(char const *string, int c);
 char	*ft_strdup_gnl(char const *s);

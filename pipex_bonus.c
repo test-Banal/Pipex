@@ -6,12 +6,11 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:46:41 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 18:19:07 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:43:04 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
 
 int	open_files_check(t_variables *variables, char **argv, int argc)
 {

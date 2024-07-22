@@ -6,12 +6,11 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:57:18 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 18:05:17 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:52:10 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 char	*ft_substr(char const *s, int start, int len)
 {
@@ -87,6 +86,7 @@ char	**main_split(char const *s, char c)
 	words[j] = NULL;
 	return (words);
 }
+
 char	**ft_split(char const *s, char c)
 {
 	char	**words;

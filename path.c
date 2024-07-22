@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:53 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 18:21:52 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:43:55 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	close_2(int first, int second)
 	close(first);
 	close(second);
 }
-
 
 void	close_all(t_variables *variables)
 {

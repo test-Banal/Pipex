@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:44 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 16:06:40 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:41:38 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*true_path(char *argv, char **env)
 	if (access(argv, F_OK) == 0)
 		return (argv);
 	if (ft_strchr (argv, '/') != NULL)
-		f_error();
+		ft_error();
 	path = "PATH=";
 	i = 0;
 	args = ft_split(argv, ' ');
@@ -70,7 +70,7 @@ char	*true_path(char *argv, char **env)
 			return (res_split[i]);
 		i++;
 	}
-	f_error();
+	ft_error();
 	return (NULL);
 }
 
@@ -87,18 +87,4 @@ void	close_all(t_variables *variables)
 	}
 	close(variables -> infile);
 	close(variables -> outfile);
-}
-
-
-void	fn_path(char **res_split, char *argv)
-{
-	int	i;
-
-	i = 0;
-	while (res_split[i])
-	{
-		res_split[i] = ft_strjoin(res_split[i], "/");
-		res_split[i] = ft_strjoin(res_split[i], argv);
-		i++;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 15:50:34 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 18:16:04 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:35:32 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ char	*ft_strjoin_gnl(char const *s1, char const *s2)
 
 	if (s1 && s2)
 	{
-		len1 = ft_strlen_gnl(s1);
-		len2 = ft_strlen_gnl(s2);
+		len1 = ft_strlen(s1);
+		len2 = ft_strlen(s2);
 		str = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
 		if (str == NULL)
 			return (NULL);

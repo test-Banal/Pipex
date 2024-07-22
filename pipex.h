@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:42:23 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 16:19:00 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:29:28 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 
+# include "./libft/libft.h"
+
 typedef struct s_variables
 {
 	int	f1;
@@ -30,6 +32,15 @@ typedef struct s_variables
 	int	cc;
 }				t_variables;
 
+char	*path_finder(char **env);
+char	*true_path(char *argv, char **env);
+void	close_2(int first, int second);
+void	close_all(t_variables *variables);
+void	fn_path(char **res_split, char *argv);
+void	piping(t_variables *variables, char **argv, char **env, int i);
+void	dup2_check(int fd1, int fd2);
+void	size_check(int argc);
+void	open_files(t_variables *variables, char **argv, int argc);
 
 
 #endif

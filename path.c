@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:53 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 16:18:29 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:21:52 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,17 @@ void	close_all(t_variables *variables)
 	close(variables -> infile);
 	close(variables -> fd[1]);
 	close(variables -> fd[0]);
+}
+
+void	fn_path(char **res_split, char *argv)
+{
+	int	i;
+
+	i = 0;
+	while (res_split[i])
+	{
+		res_split[i] = ft_strjoin(res_split[i], "/");
+		res_split[i] = ft_strjoin(res_split[i], argv);
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:52:25 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:54:35 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:35:11 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s1)
 	int		j;
 
 	str = (char *)s1;
-	j = fT_strlen(str);
+	j = ft_strlen(str);
 	arr = (char *)malloc(j + 1);
 	if (!arr)
 		return (NULL);

@@ -6,11 +6,11 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:39:40 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 18:15:59 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:30:20 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "olibft.h"
+#include "libft.h"
 
 static char	*ft_sub(char **rest, char **line)
 {

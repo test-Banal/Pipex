@@ -6,13 +6,13 @@
 #    By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/19 16:32:50 by aneumann          #+#    #+#              #
-#    Updated: 2024/07/22 16:16:02 by aneumann         ###   ########.fr        #
+#    Updated: 2024/07/22 18:41:01 by aneumann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	pipex
 
-NAME_BONUS	=	pipex
+NAME_BONUS	=	pipex_bonus
 
 SRC		=	pipex.c path.c 
 
@@ -20,9 +20,9 @@ SRC_BONUS	=		here_doc_bonus.c pipex_bonus.c path_bonus.c
 
 LIBFT		=	libft/libft.a
 
-OBJ		=	$(SRC.c=.o)
+OBJ		=	$(SRC:.c=.o)
 
-OBJ_BONUS	=	$(SRC_BONUS.c=.o)
+OBJ_BONUS	=	$(SRC_BONUS:.c=.o)
 
 CC		=	cc
 
@@ -36,7 +36,7 @@ $(NAME):	$(OBJ)
 
 all:		$(NAME)
 
-$(NAME_BONUS):	$(OBJ_BONUNS)
+$(NAME_BONUS):	$(OBJ_BONUS)
 			make -C ./libft
 			$(CC) $(CFLAGS) -o $(NAME_BONUS) $(OBJ_BONUS) $(LIBFT)
 

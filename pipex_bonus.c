@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:46:41 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 18:43:04 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:04:00 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	piping(t_variables *variables, char **argv, char **env, int i)
 	variables -> f1 = fork();
 	if (variables -> f1 == 0)
 	{
-		args = ft_split(argv[i], ' ');
+		args = ft_split_b(argv[i], ' ');
 		if (i == 2)
 			dup2_2(variables -> infile, STDIN_FILENO,
 				variables -> fd[i - 2][1], STDOUT_FILENO);

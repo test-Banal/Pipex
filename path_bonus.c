@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils2.c                                     :+:      :+:    :+:   */
+/*   path_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 16:47:53 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:47:55 by aneumann         ###   ########.fr       */
+/*   Created: 2024/07/19 16:47:44 by aneumann          #+#    #+#             */
+/*   Updated: 2024/07/22 16:06:40 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 char	*path_finder(char **env)
 {
@@ -29,6 +29,21 @@ char	*path_finder(char **env)
 		i++;
 	}
 	return (path);
+}
+
+void	fn_path(char **res_split, char *argv)
+{
+	int		i;
+	char	*temp;
+
+	i = 0;
+	while (res_split[i])
+	{
+		temp = res_split[i];
+		res_split[i] = ft_strjoin(res_split[i], "/");
+		res_split[i] = ft_strjoin(res_split[i], argv);
+		i++;
+	}
 }
 
 char	*true_path(char *argv, char **env)
@@ -59,31 +74,31 @@ char	*true_path(char *argv, char **env)
 	return (NULL);
 }
 
-void	close_2(int first, int second)
-{
-	if (first == -1 || second == -1)
-	{
-		perror("Failed close");
-		exit(0);
-	}
-	close(first);
-	close(second);
-}
-
-int	ft_strlen(const char *str)
+void	close_all(t_variables *variables)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (i < variables -> cc)
+	{
+		close(variables -> fd[i][0]);
+		close(variables -> fd[i][1]);
 		i++;
-	return (i);
+	}
+	close(variables -> infile);
+	close(variables -> outfile);
 }
 
-void	close_all(t_variables *variables)
+
+void	fn_path(char **res_split, char *argv)
 {
-	close(variables -> outfile);
-	close(variables -> infile);
-	close(variables -> fd[1]);
-	close(variables -> fd[0]);
+	int	i;
+
+	i = 0;
+	while (res_split[i])
+	{
+		res_split[i] = ft_strjoin(res_split[i], "/");
+		res_split[i] = ft_strjoin(res_split[i], argv);
+		i++;
+	}
 }

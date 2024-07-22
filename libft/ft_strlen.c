@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:54:46 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:55:59 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:56:28 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_strlen(const char *str)
 {
 	int	i;
 
+	i = 0;
 	while (str[i] != '\0')
 		i++;
 	return (i);

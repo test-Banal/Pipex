@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils2_bonus.c                               :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 16:47:44 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:47:46 by aneumann         ###   ########.fr       */
+/*   Created: 2024/07/19 16:47:53 by aneumann          #+#    #+#             */
+/*   Updated: 2024/07/22 16:18:29 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "pipex.h"
 
 char	*path_finder(char **env)
 {
@@ -31,21 +31,6 @@ char	*path_finder(char **env)
 	return (path);
 }
 
-void	fn_path(char **res_split, char *argv)
-{
-	int		i;
-	char	*temp;
-
-	i = 0;
-	while (res_split[i])
-	{
-		temp = res_split[i];
-		res_split[i] = ft_strjoin(res_split[i], "/");
-		res_split[i] = ft_strjoin(res_split[i], argv);
-		i++;
-	}
-}
-
 char	*true_path(char *argv, char **env)
 {
 	int				i;
@@ -56,7 +41,7 @@ char	*true_path(char *argv, char **env)
 	if (access(argv, F_OK) == 0)
 		return (argv);
 	if (ft_strchr (argv, '/') != NULL)
-		f_error();
+		ft_error();
 	path = "PATH=";
 	i = 0;
 	args = ft_split(argv, ' ');
@@ -70,31 +55,26 @@ char	*true_path(char *argv, char **env)
 			return (res_split[i]);
 		i++;
 	}
-	f_error();
+	ft_error();
 	return (NULL);
 }
 
-int	ft_strlen(const char *str)
+void	close_2(int first, int second)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	if (first == -1 || second == -1)
+	{
+		perror("Failed close");
+		exit(0);
+	}
+	close(first);
+	close(second);
 }
+
 
 void	close_all(t_variables *variables)
 {
-	int	i;
-
-	i = 0;
-	while (i < variables -> cc)
-	{
-		close(variables -> fd[i][0]);
-		close(variables -> fd[i][1]);
-		i++;
-	}
-	close(variables -> infile);
 	close(variables -> outfile);
+	close(variables -> infile);
+	close(variables -> fd[1]);
+	close(variables -> fd[0]);
 }

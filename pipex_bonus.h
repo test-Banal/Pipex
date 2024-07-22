@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:46:54 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:46:57 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:18:51 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,38 +31,8 @@ typedef struct s_variables
 	int	cc;
 }				t_variables;
 
-int		ft_strlen(const char *str);
 
-char	*ft_strjoin(char *s1, char *s2);
 
-char	*ft_strdup(const char *s1);
 
-char	*ft_substr(char const *s, int start, int len);
-
-int		ft_strncmp(const char *s1, const char *s2, int n);
-
-int		count_words(char const *s, char c);
-
-char	**main_split(char const *s, char c);
-
-char	**ft_split(char const *s, char c);
-
-void	fn_path(char **res_split, char *argv);
-
-char	*true_path(char *argv, char **env);
-
-void	close_all(t_variables *variables);
-
-char	*path_finder(char **env);
-
-int		open_files_check(t_variables *variables, char **argv, int argc);
-
-void	here_doc(t_variables *variables, char *lim);
-
-int		here_doc_check(char *argv);
-
-char	*ft_strchr(const char *s, int c);
-
-void	f_error(void);
 
 #endif

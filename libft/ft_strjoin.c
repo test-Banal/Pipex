@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:56:31 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:56:52 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:08:41 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	step = 0;
 	i = ft_strlen(s1);
 	j = ft_strlen(s2);
-	arr = (char *)malloc(i + j + 1);
+	arr = (char *)malloc(sizeof(char) * (i + j + 1));
 	if (!arr)
 		return (NULL);
 	while (*s1)

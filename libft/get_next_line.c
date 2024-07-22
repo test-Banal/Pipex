@@ -6,11 +6,11 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:39:40 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 15:58:40 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:15:59 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "olibft.h"
 
 static char	*ft_sub(char **rest, char **line)
 {
@@ -20,7 +20,7 @@ static char	*ft_sub(char **rest, char **line)
 	if (*rest)
 	{
 		*line = *rest;
-		str = ft_strchr_gnl(*rest, '\n');
+		str = ft_strchr(*rest, '\n');
 		if (str)
 		{
 			str++;
@@ -46,7 +46,7 @@ static char	*ft_sub_2(char **rest, char **line, char **buf)
 	char	*str;
 	char	*tmp;
 
-	str = ft_strchr_gnl(*buf, '\n');
+	str = ft_strchr(*buf, '\n');
 	if (str)
 	{
 		str++;
@@ -82,7 +82,7 @@ char	*get_next_line(int fd)
 		str = ft_sub_2(&rest[fd], &line, &buf);
 	}
 	free(buf);
-	if (ft_strlen_gnl(line) > 0)
+	if (ft_strlen(line) > 0)
 		return (line);
 	free (line);
 	return (NULL);

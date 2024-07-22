@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	f_error(void)
+void	ft_error(void)
 {
 	perror("Error");
 	exit(0);

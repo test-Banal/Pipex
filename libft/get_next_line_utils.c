@@ -6,11 +6,11 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 15:50:34 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:01:48 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:16:04 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 char	*ft_strchr_gnl(char const *string, int c)
 {
@@ -34,7 +34,7 @@ char	*ft_strdup_gnl(char const *s)
 	int		leng_s;
 	int		i;
 
-	leng_s = ft_strlen_gnl((const char *)s);
+	leng_s = ft_strlen((const char *)s);
 	dest = (char *)malloc(sizeof(char) * (leng_s +1));
 	if (!dest)
 		return (NULL);
@@ -75,14 +75,4 @@ char	*ft_strjoin_gnl(char const *s1, char const *s2)
 		return (str);
 	}
 	return (NULL);
-}
-
-int	ft_strlen_gnl(char const *c)
-{
-	int	a;
-
-	a = 0;
-	while (c[a] != '\0')
-		a++;
-	return (a);
 }

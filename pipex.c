@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:17 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/19 16:47:19 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:00:01 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ void	size_check(int argc)
 {
 	if (argc != 5)
 	{
-		perror("Wrong arguments");
+		perror("Wrong arguments : ./pipex infile cmd1 cmd2 outfile");
 		exit(0);
 	}
 }
 
 void	dup2_check(int fd1, int fd2)
 {
+	//file1 faux exit code = 0 + bash : argv[1] : not such file or directory 
+	//file2 faux exit code = 2 + error outfile
 	if (fd1 == -1 || fd2 == -1)
 	{
 		perror("open");
@@ -42,24 +44,28 @@ void	piping(t_variables *variables, char **argv, char **env, int i)
 {
 	char	**args;
 
-	variables -> f1 = fork();
-	if (variables -> f1 == 0)
+	variables->f1 = fork();
+	if (variables->f1 == 0)
 	{
 		if (i == 2)
 		{
-			dup2_check(variables -> infile, STDIN_FILENO);
-			dup2_check(variables -> fd[1], STDOUT_FILENO);
+			dup2_check(variables->infile, STDIN_FILENO);
+			dup2_check(variables->fd[1], STDOUT_FILENO);
 			args = ft_split(argv[i], ' ');
 			close_all(variables);
 			execve(true_path(argv[i], env), args, env);
+			perror("execve");
+			exit(1);
 		}
 		else if (i == 3)
 		{
-			dup2_check(variables -> outfile, STDOUT_FILENO);
-			dup2_check(variables -> fd[0], STDIN_FILENO);
+			dup2_check(variables->outfile, STDOUT_FILENO);
+			dup2_check(variables->fd[0], STDIN_FILENO);
 			args = ft_split(argv[i], ' ');
 			close_all(variables);
 			execve(true_path(argv[i], env), args, env);
+			perror("execve");
+			exit(1);
 		}
 	}
 }

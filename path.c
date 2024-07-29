@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:53 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 18:43:55 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/29 19:09:45 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,22 @@ char	*true_path(char *argv, char **env)
 	if (ft_strchr (argv, '/') != NULL)
 		ft_error();
 	path = "PATH=";
-	i = 0;
 	args = ft_split(argv, ' ');
 	path = path_finder(env);
 	i = 0;
 	res_split = ft_split(path, ':');
 	fn_path(res_split, args[0]);
-	while (res_split[i])
+	while (res_split[i++])
 	{
 		if (access(res_split[i], F_OK) == 0)
-			return (res_split[i]);
-		i++;
+		{
+			if (access(res_split[i], X_OK) == 0)
+				return (res_split[i]);
+			else
+				ft_error_msg("Permission denied", 126);
+		}
 	}
-	ft_error();
+	ft_error_msg("Command not found", 127);
 	return (NULL);
 }
 

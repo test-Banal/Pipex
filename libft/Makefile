@@ -1,6 +1,6 @@
 NAME		=	libft.a
 
-SRC			= ft_error.c ft_split.c ft_strjoin.c ft_strchr.c ft_strlen.c \
+SRC			= ft_error.c ft_split.c ft_strjoin.c ft_strchr.c ft_strlen.c ft_strnstr.c\
 				ft_strncmp.c ft_strdup.c get_next_line.c get_next_line_utils.c
 
 CFLAGS		= -Wall -Wextra -Werror -g3

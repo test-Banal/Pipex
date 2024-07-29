@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:51:15 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/23 17:19:10 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:50:22 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ char	*ft_strdup(const char *s1);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_strlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, int n);
-
 char	*ft_strchr_gnl(char const *string, int c);
 char	*ft_strdup_gnl(char const *s);
 char	*ft_strjoin_gnl(char const *s1, char const *s2);
 char	*get_next_line(int fd);
+char	*ft_strnstr(const char *s1, const char *s2, size_t n);
 
 #endif

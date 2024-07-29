@@ -6,17 +6,28 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:17 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/23 18:00:01 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:28:33 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <errno.h>
 
 void	open_files(t_variables *variables, char **argv, int argc)
 {
-	variables -> infile = open(argv[1], O_RDWR, 0777);
-	variables -> outfile = open(argv[argc - 1],
-			O_RDWR | O_CREAT | O_TRUNC, 0777);
+	variables->infile = open(argv[1], O_RDONLY, 0);
+	if (variables->infile == -1)
+	{
+		close(variables->infile);
+		ft_error_msg("Error opening infile", 1);
+	}
+	variables->outfile = open(argv[argc - 1],
+			O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (variables->outfile == -1)
+	{
+		close(variables->infile);
+		ft_error_msg("Error opening outfile", 1);
+	}
 }
 
 void	size_check(int argc)
@@ -30,14 +41,12 @@ void	size_check(int argc)
 
 void	dup2_check(int fd1, int fd2)
 {
-	//file1 faux exit code = 0 + bash : argv[1] : not such file or directory 
-	//file2 faux exit code = 2 + error outfile
-	if (fd1 == -1 || fd2 == -1)
-	{
-		perror("open");
-		exit(0);
-	}
-	dup2(fd1, fd2);
+	if (fd1 == -1)
+		ft_error_msg("Error opening file", 1);
+	if (fd2 == -1)
+		ft_error_msg("Error opening file", 2);
+	if (dup2(fd1, fd2) == -1)
+		ft_error_msg("Error duplicating file descriptor", 1);
 }
 
 void	piping(t_variables *variables, char **argv, char **env, int i)
@@ -54,8 +63,6 @@ void	piping(t_variables *variables, char **argv, char **env, int i)
 			args = ft_split(argv[i], ' ');
 			close_all(variables);
 			execve(true_path(argv[i], env), args, env);
-			perror("execve");
-			exit(1);
 		}
 		else if (i == 3)
 		{
@@ -64,9 +71,21 @@ void	piping(t_variables *variables, char **argv, char **env, int i)
 			args = ft_split(argv[i], ' ');
 			close_all(variables);
 			execve(true_path(argv[i], env), args, env);
-			perror("execve");
-			exit(1);
 		}
+		if (errno == ENOENT)
+			ft_error_msg("Error executing command", 127);
+		else
+			ft_error_msg("Error executing command", 1);
+	}
+}
+
+void	ft_pipe(int *fd)
+{
+	pipe(fd);
+	if (fd[0] == -1 || fd[1] == -1)
+	{
+		perror("pipe");
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -79,7 +98,7 @@ int	main(int argc, char **argv, char **env)
 	i = 2;
 	size_check(argc);
 	open_files(&variables, argv, argc);
-	pipe(variables.fd);
+	ft_pipe(variables.fd);
 	while (i < 4)
 		piping(&variables, argv, env, i++);
 	close_2(variables.infile, variables.outfile);
@@ -87,3 +106,20 @@ int	main(int argc, char **argv, char **env)
 	while (wait(NULL) != -1)
 		;
 }
+
+// int	main(int argc, char **argv, char **env)
+// {
+// ...
+// ...
+// ...
+// 	while (waitpid(-1, &status, 0) > 0)
+// 	{
+// 		if (WIFEXITED(status))
+// 			printf("Process exited with status %d\n", WEXITSTATUS(status));
+// 		else if (WIFSIGNALED(status))
+// 			printf("Process killed by signal %d\n", WTERMSIG(status));
+// 	}
+// 	if (errno != ECHILD)
+// 			ft_error_msg("waitpid", 1);
+// 	return (0);
+// }

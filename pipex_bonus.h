@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:46:54 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/25 12:25:17 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:53:41 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	fn_path_b(char **res_split, char *argv);
 char	*true_path(char *argv, char **env);
 void	close_all(t_variables *variables);
 int		open_files_check(t_variables *variables, char **argv, int argc);
-void	dup2_2(int first, int second, int third, int fourth);
+void	dup2_b(int first, int second, int third, int fourth);
 void	piping(t_variables *variables, char **argv, char **env, int i);
 void	do_pipes(t_variables *variables);
 

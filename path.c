@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:53 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/29 19:09:45 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:06:53 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ char	*true_path(char *argv, char **env)
 	if (ft_strchr (argv, '/') != NULL)
 		ft_error();
 	path = "PATH=";
-	args = ft_split(argv, ' ');
+	args = ft_split_b(argv, ' ');
 	path = path_finder(env);
 	i = 0;
-	res_split = ft_split(path, ':');
+	res_split = ft_split_b(path, ':');
 	fn_path(res_split, args[0]);
 	while (res_split[i++])
 	{

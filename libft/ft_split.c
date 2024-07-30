@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:57:18 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 19:09:03 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:59:24 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,25 +85,6 @@ char	**main_split(char const *s, char c)
 	}
 	words[j] = NULL;
 	return (words);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**words;
-	int		count;
-
-	if (!s)
-		return (NULL);
-	count = count_words(s, c);
-	if (count == 0)
-	{
-		words = (char **)malloc(1 * sizeof(char *));
-		if (!words)
-			return (NULL);
-		words[0] = NULL;
-		return (words);
-	}
-	return (main_split(s, c));
 }
 
 char	**ft_split_b(char const *s, char c)

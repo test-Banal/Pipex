@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:46:41 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/29 14:33:06 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:53:35 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	open_files_check(t_variables *variables, char **argv, int argc)
 	return (0);
 }
 
-void	dup2_2(int first, int second, int third, int fourth)
+void	dup2_b(int first, int second, int third, int fourth)
 {
 	if (first == -1 || second == -1 || third == -1 || fourth == -1)
 	{
-		perror("Failed dup2");
+		perror("Failed to open file");
 		exit(0);
 	}
 	dup2(first, second);
@@ -52,16 +52,16 @@ void	piping(t_variables *variables, char **argv, char **env, int i)
 	{
 		args = ft_split_b(argv[i], ' ');
 		if (i == 2)
-			dup2_2(variables -> infile, STDIN_FILENO,
+			dup2_b(variables -> infile, STDIN_FILENO,
 				variables -> fd[i - 2][1], STDOUT_FILENO);
 		else if (i == 3 && here_doc_check(argv[1]))
-			dup2_2(variables -> here_doc, STDIN_FILENO,
+			dup2_b(variables -> here_doc, STDIN_FILENO,
 				variables -> fd[i - 2][1], STDOUT_FILENO);
 		else if (i == variables -> cc)
-			dup2_2(variables -> outfile, STDOUT_FILENO,
+			dup2_b(variables -> outfile, STDOUT_FILENO,
 				variables -> fd[i - 3][0], STDIN_FILENO);
 		else
-			dup2_2(variables -> fd[i - 2][1], STDOUT_FILENO,
+			dup2_b(variables -> fd[i - 2][1], STDOUT_FILENO,
 				variables -> fd[i - 3][0], STDIN_FILENO);
 		close_all(variables);
 		execve(true_path(argv[i], env), args, env);
@@ -84,8 +84,8 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc < 5)
 	{
-		perror("Wrong arguments");
-		exit(0);
+		perror("Wrong arguments ici");
+		exit(1);
 	}
 	variables.cc = argc - 2;
 	i = 2;

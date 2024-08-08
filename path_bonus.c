@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:44 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/22 19:03:50 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/06 19:56:13 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*true_path(char *argv, char **env)
 	if (access(argv, F_OK) == 0)
 		return (argv);
 	if (ft_strchr (argv, '/') != NULL)
-		ft_error();
+		ft_error_msg("Error : no such file or directory\n", -1);
 	path = "PATH=";
 	i = 0;
 	args = ft_split_b(argv, ' ');
@@ -70,7 +70,7 @@ char	*true_path(char *argv, char **env)
 			return (res_split[i]);
 		i++;
 	}
-	ft_error();
+	ft_error_msg("Error : command not found ici\n", 127);
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:51:15 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/30 15:00:06 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/08 06:58:35 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 void	ft_error(void);
 void	ft_putstr_fd(char *s, int fd);
-void	ft_error_msg(char *msg, int exit_code);
+//void	ft_error_msg(char *msg, int exit_code);
 char	*ft_substr(char const *s, int start, int len);
 int		count_words(char const *s, char c);
 char	**main_split(char const *s, char c);

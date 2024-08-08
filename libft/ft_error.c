@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:50:57 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/30 15:41:52 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/08 06:58:27 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 void	ft_error(void)
 {
-	perror("Error");
+	ft_putstr_fd("Error", 2);
 	exit(0);
 }
 
-void	ft_error_msg(char *msg, int exit_code)
-{
-	ft_putstr_fd(msg, 2);
-	exit(exit_code);
-}
+
+

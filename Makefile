@@ -6,13 +6,13 @@
 #    By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/19 16:32:50 by aneumann          #+#    #+#              #
-#    Updated: 2024/07/30 17:24:34 by aneumann         ###   ########.fr        #
+#    Updated: 2024/08/06 15:48:08 by aneumann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	pipex
 
-NAME_BONUS	=	pipex_b
+NAME_BONUS	=	pipex_bonus
 
 SRC		=	pipex.c path.c
 

@@ -6,12 +6,12 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:46:41 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/30 14:53:35 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/08 17:03:10 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
+#include <errno.h>
 int	open_files_check(t_variables *variables, char **argv, int argc)
 {
 	if (here_doc_check(argv[1]))
@@ -35,12 +35,11 @@ int	open_files_check(t_variables *variables, char **argv, int argc)
 void	dup2_b(int first, int second, int third, int fourth)
 {
 	if (first == -1 || second == -1 || third == -1 || fourth == -1)
-	{
-		perror("Failed to open file");
-		exit(0);
-	}
-	dup2(first, second);
-	dup2(third, fourth);
+		ft_error_msg("Error : open fd\n", -1);
+	if (dup2(first, second) == -1)
+		ft_error_msg("Error : dup2\n", -1);
+	if (dup2(third, fourth) == -1)
+		ft_error_msg("Error : dup2\n", -1);
 }
 
 void	piping(t_variables *variables, char **argv, char **env, int i)
@@ -68,6 +67,11 @@ void	piping(t_variables *variables, char **argv, char **env, int i)
 	}
 }
 
+void	ft_error_msg(char *msg, int exit_code)
+{
+	ft_putstr_fd(msg, 2);
+	exit(exit_code);
+}
 void	do_pipes(t_variables *variables)
 {
 	int	i;

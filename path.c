@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:53 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/30 16:06:53 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:17:37 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*path_finder(char **env)
 	return (path);
 }
 
-char	*true_path(char *argv, char **env)
+char	*true_path(char *argv, char **env, t_variables *variables) //rajouter variables
 {
 	int				i;
 	char			**res_split;
@@ -41,7 +41,10 @@ char	*true_path(char *argv, char **env)
 	if (access(argv, F_OK) == 0)
 		return (argv);
 	if (ft_strchr (argv, '/') != NULL)
+	{
+		printf("OEOE\n");
 		ft_error();
+	}
 	path = "PATH=";
 	args = ft_split_b(argv, ' ');
 	path = path_finder(env);
@@ -55,10 +58,11 @@ char	*true_path(char *argv, char **env)
 			if (access(res_split[i], X_OK) == 0)
 				return (res_split[i]);
 			else
-				ft_error_msg("Permission denied", 126);
+				return (ft_error_msg("Permission denied\n", 126, variables), NULL);
 		}
 	}
-	ft_error_msg("Command not found", 127);
+	free(res_split);
+	free(args);
 	return (NULL);
 }
 
@@ -67,19 +71,46 @@ void	close_2(int first, int second)
 	if (first == -1 || second == -1)
 	{
 		perror("Failed close");
-		exit(0);
+		exit(10);
 	}
-	close(first);
-	close(second);
+    if (first != -1)
+        close(first);
+    if (second != -1)
+        close(second);
 }
 
 void	close_all(t_variables *variables)
 {
-	close(variables -> outfile);
-	close(variables -> infile);
-	close(variables -> fd[1]);
-	close(variables -> fd[0]);
+	printf("BEFORE CLOSE\nfd outfile = %d\nfdinfile = %d\nfd1 = %d\nfd2 = %d\n", variables->outfile, variables->infile, variables->fd[1], variables->fd[0]);
+
+    if (variables->outfile >= 0) {
+        close(variables->outfile);
+        variables->outfile = -1;
+    }
+    if (variables->infile >= 0) {
+        close(variables->infile);
+        variables->infile = -1;
+    }
+    if (variables->fd[1] >= 0) {
+        close(variables->fd[1]);
+        variables->fd[1] = -1;
+    }
+    if (variables->fd[0] >= 0) {
+        close(variables->fd[0]);
+        variables->fd[0] = -1;
+    }
+	printf("AFTER CLOSE\nfd outfile = %d\nfdinfile = %d\nfd1 = %d\nfd2 = %d\n", variables->outfile, variables->infile, variables->fd[1], variables->fd[0]);
+
 }
+// {
+// 	printf("BEFORE CLOSE\nfd outfile = %d\nfdinfile = %d\nfd1 = %d\nfd2 = %d\n", variables->outfile, variables->infile, variables->fd[1], variables->fd[0]);
+// 	close(variables->outfile);
+// 	close(variables->infile);
+// 	close(variables->fd[1]);
+// 	close(variables->fd[0]);
+// 	printf("AFTER CLOSE\nfd outfile = %d\nfdinfile = %d\nfd1 = %d\nfd2 = %d\n", variables->outfile, variables->infile, variables->fd[1], variables->fd[0]);
+// }
+
 
 void	fn_path(char **res_split, char *argv)
 {

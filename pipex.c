@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:17 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/08 16:30:17 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/19 08:42:05 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ void	open_files(t_variables *variables, char **argv, int argc)
 	{
 		ft_error_msg("Error opening outfile : No such file or directory\n", 1, variables);
 	}
-	//close(variables->infile);
-	//close(variables->outfile);
-
-
 }
 
 void	size_check(int argc)
@@ -66,9 +62,13 @@ static void	ft_exec(char **argv, char **args, char **env, int i, t_variables *va
 	char	*path;
 	if (i == 2 || i == 3)
 	{
-		path = true_path(argv[i], env, variables); //rajouter variables
+		path = true_path(argv[i], env); //rajouter variables
 		if (path == NULL)
 		{
+				int j = -1;
+				while (args[++j])
+					free(args[j]);
+				free(args);
 				ft_putstr_fd(argv[i], 2);
 				ft_error_msg(": Error:  command not found\n", 127, variables);
 		}
@@ -89,19 +89,17 @@ void	piping_m(t_variables *variables, char **argv, char **env, int i)
        args = ft_split_b(argv[i], ' ');
         if (i == 2)
         {
-			close(variables->fd[0]);
             dup2_check(variables->infile, STDIN_FILENO);
             dup2_check(variables->fd[1], STDOUT_FILENO);
-			close(variables->fd[1]);
+			close(variables->fd[0]);
         }
         else if (i == 3)
         {
 			close(variables->fd[1]);
             dup2_check(variables->fd[0], STDIN_FILENO);
             dup2_check(variables->outfile, STDOUT_FILENO);
-			close(variables->fd[0]);
+			close(variables->fd[1]);
         }
-        close_all(variables);
         ft_exec(argv, args, env, i, variables);
 		exit(0);
     }

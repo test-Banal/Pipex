@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:42:23 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/08 15:00:10 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:06:31 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	ft_error_msg(char *msg, int exit_code, t_variables *variables);
 
 
 char	*path_finder(char **env);
-char	*true_path(char *argv, char **env, t_variables *variables);
+// char	*true_path(char *argv, char **env);
+char	*true_path(char *cmd, char **envp);
 void	close_2(int first, int second);
 void	close_all(t_variables *variables);
 void	fn_path(char **res_split, char *argv);

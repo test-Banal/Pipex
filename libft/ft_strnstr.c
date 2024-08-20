@@ -6,11 +6,27 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:03:21 by aneumann          #+#    #+#             */
-/*   Updated: 2024/07/29 16:03:24 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:46:25 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+char	*ft_strchr(const char *s, int c)
+{
+	char	l;
+
+	l = (char)c;
+	while (*s)
+	{
+		if (*s == l)
+			return ((char *)s);
+		s++;
+	}
+	if (*s == l)
+		return ((char *)s);
+	return (0);
+}
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {

@@ -6,7 +6,7 @@
 #    By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/19 16:32:50 by aneumann          #+#    #+#              #
-#    Updated: 2024/08/06 15:48:08 by aneumann         ###   ########.fr        #
+#    Updated: 2024/08/20 15:56:20 by aneumann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME		=	pipex
 
 NAME_BONUS	=	pipex_bonus
 
-SRC		=	pipex.c path.c
+SRC		=	pipex.c path.c utils.c here_doc.c main.c child.c
 
-SRC_BONUS	=		here_doc_bonus.c pipex_bonus.c path_bonus.c
+SRC_BONUS	=		here_doc.c pipex_bonus.c path.c utils.c child.c pipex.c
 
 LIBFT		=	libft/libft.a
 

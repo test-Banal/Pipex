@@ -6,156 +6,109 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:53 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/14 14:56:58 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:00:42 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*path_finder(char **env)
+bool	is_command(t_variables *pipex, char *command, int i)
 {
-	int		i;
-	char	*path;
-
-	i = 0;
-	path = "PATH=";
-	while (env[i])
+	if (!command)
+		return (false);
+	if (access(command, F_OK) == 0 && ft_strncmp(command, "/", 1) == 0)
 	{
-		if (*env[i] == 'P')
-		{
-			if (!(ft_strncmp(env[i], path, 5)))
-				path = env[i];
-		}
-		i++;
+		pipex->cmds[i].path = ft_strdup(command);
+		if (!pipex->cmds[i].path)
+			return (false);
+		free(command);
+		pipex->cmds[i].found = true;
+		return (true);
 	}
-	return (path);
+	free(command);
+	return (false);
 }
 
- //fonction gcollet
- 
-// char	*true_path(char *cmd, char **envp)
-// {
-// 	char	**paths;
-// 	char	*path;
-// 	int		i;
-// 	char	*part_path;
-
-// 	i = 0;
-// 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
-// 		i++;
-// 	paths = ft_split_b(envp[i] + 5, ':');
-// 	i = 0;
-// 	while (paths[i])
-// 	{
-// 		part_path = ft_strjoin(paths[i], "/");
-// 		path = ft_strjoin(part_path, cmd);
-// 		free(part_path);
-// 		if (access(path, F_OK) == 0)
-// 			return (path);
-// 		free(path);
-// 		i++;
-// 	}
-// 	i = -1;
-// 	while (paths[++i])
-// 		free(paths[i]);
-// 	free(paths);
-// 	return (0);
-// }
-
-// ici fonction orignel 
-char	*true_path(char *argv, char **env)
+void	find_command(t_variables *pipex, int i)
 {
-	int				i;
-	char			**res_split;
-	char			**args;
-	char			*path;
+	char	*command;
+	int		j;
 
-	if (access(argv, F_OK) == 0)
-		return (argv);
-	if (ft_strchr (argv, '/') != NULL)
-		ft_error();
-	path = "PATH=";
-	args = ft_split_b(argv, ' ');
-	path = path_finder(env);
-	i = 0;
-	res_split = ft_split_b(path, ':');
-	fn_path(res_split, args[0]);
-	while (res_split[i++])
+	if (pipex->cmds[i].args[0]
+		&& is_command(pipex, ft_strdup(pipex->cmds[i].args[0]), i))
+		return ;
+	j = 0;
+	if (!pipex->paths)
+		return (cmd_not_found(pipex, i));
+	while (pipex->paths[j])
 	{
-		if (access(res_split[i], F_OK) == 0)
-		{
-			if (access(res_split[i], X_OK) == 0)
-				return (res_split[i]);
-			//else
-			//	return (ft_error_msg("Permission denied\n", 126, variables), NULL);
-		}
+		command = ft_strjoin3(pipex->paths[j],
+				"/", pipex->cmds[i].args[0]);
+		if (is_command(pipex, command, i))
+			break ;
+		j++;
+		if (!pipex->paths[j])
+			cmd_not_found(pipex, i);
 	}
-	i = - 1;
-	while (args[++i])
-		free(args[i]);
-	free(args);
-	i = -1;
-	while (res_split[++i])
-		free(res_split[i]);
-	free(res_split);
-	return (NULL);
 }
 
-void	close_2(int first, int second)
-{
-	if (first == -1 || second == -1)
-	{
-		perror("Failed close");
-		exit(10);
-	}
-    if (first != -1)
-        close(first);
-    if (second != -1)
-        close(second);
-}
-
-void	close_all(t_variables *variables)
-{
-	//printf("BEFORE CLOSE\nfd outfile = %d\nfdinfile = %d\nfd1 = %d\nfd2 = %d\n", variables->outfile, variables->infile, variables->fd[1], variables->fd[0]);
-
-    if (variables->outfile >= 0) {
-        close(variables->outfile);
-        variables->outfile = -1;
-    }
-    if (variables->infile >= 0) {
-        close(variables->infile);
-        variables->infile = -1;
-    }
-    if (variables->fd[1] >= 0) {
-        close(variables->fd[1]);
-        variables->fd[1] = -1;
-    }
-    if (variables->fd[0] >= 0) {
-        close(variables->fd[0]);
-        variables->fd[0] = -1;
-    }
-	//printf("AFTER CLOSE\nfd outfile = %d\nfdinfile = %d\nfd1 = %d\nfd2 = %d\n", variables->outfile, variables->infile, variables->fd[1], variables->fd[0]);
-
-}
-// {
-// 	printf("BEFORE CLOSE\nfd outfile = %d\nfdinfile = %d\nfd1 = %d\nfd2 = %d\n", variables->outfile, variables->infile, variables->fd[1], variables->fd[0]);
-// 	close(variables->outfile);
-// 	close(variables->infile);
-// 	close(variables->fd[1]);
-// 	close(variables->fd[0]);
-// 	printf("AFTER CLOSE\nfd outfile = %d\nfdinfile = %d\nfd1 = %d\nfd2 = %d\n", variables->outfile, variables->infile, variables->fd[1], variables->fd[0]);
-// }
-
-
-void	fn_path(char **res_split, char *argv)
+void	find_paths(t_variables *pipex)
 {
 	int	i;
 
 	i = 0;
-	while (res_split[i])
+	if (!pipex->envp)
+		return ;
+	while (pipex->envp[i] && ft_strncmp(pipex->envp[i], "PATH", 4) != 0)
+		i++;
+	if (pipex->envp[i] && ft_strncmp(pipex->envp[i], "PATH", 4) == 0)
+		pipex->paths = ft_split(pipex->envp[i] + 5, ':');
+}
+
+void	open_files(t_variables *pipex)
+{
+	pipex->infile = open(pipex->argv[1], O_RDONLY);
+	if (pipex->infile == -1)
 	{
-		res_split[i] = ft_strjoin(res_split[i], "/");
-		res_split[i] = ft_strjoin(res_split[i], argv);
+		if (access(pipex->argv[1], F_OK) != 0)
+			error_message(pipex->argv[1]);
+		else if (access(pipex->argv[1], R_OK) != 0)
+			error_message(pipex->argv[1]);
+		else
+			ft_putstr_fd(ERR_IN, 2);
+	}
+	pipex->outfile = open(pipex->argv[pipex->size + 2],
+			O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (pipex->outfile == -1)
+	{
+		if (access(pipex->argv[pipex->size + 2], W_OK) != 0)
+			error_message(pipex->argv[pipex->size + 2]);
+		else
+			ft_putstr_fd(ERR_OUT, 2);
+	}
+}
+
+bool	parse_input(t_variables *pipex)
+{
+	int	i;
+
+	find_paths(pipex);
+	if (pipex->heredoc)
+		open_here_doc(pipex);
+	else
+		open_files(pipex);
+	i = 0;
+	while (i < pipex->size)
+	{
+		pipex->cmds[i].found = false;
+		pipex->cmds[i].args = \
+			ft_split(pipex->argv[i + 2 + pipex->heredoc], ' ');
+		if (!pipex->cmds[i].args)
+			return (false);
+		if (!(i == 0 && pipex->infile == -1)
+			&& !(i == pipex->size - 1 && pipex->outfile == -1))
+			find_command(pipex, i);
 		i++;
 	}
+	return (true);
 }

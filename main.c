@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 16:46:41 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/20 16:02:46 by aneumann         ###   ########.fr       */
+/*   Created: 2024/08/20 15:58:53 by aneumann          #+#    #+#             */
+/*   Updated: 2024/08/20 15:58:59 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_variables	pipex;
 
-	if (argc < 5)
-		return (ft_putstr_fd(ERR_ARG_2, 2), EXIT_FAILURE);
+	if (argc != 5)
+	{
+		ft_putstr_fd(ERR_ARG_1, 2);
+		return (EXIT_FAILURE);
+	}
 	if (!pipex_init(&pipex, argc, argv, envp))
 		return (free_pipex(&pipex), error_message(NULL), EXIT_FAILURE);
-	if (argc < 5 + pipex.heredoc)
-		return (ft_putstr_fd(ERR_ARG_2, 2), free_pipex(&pipex), EXIT_FAILURE);
 	if (!parse_input(&pipex))
 		return (free_pipex(&pipex), EXIT_FAILURE);
 	if (!create_pipes(&pipex))
@@ -44,10 +45,7 @@ bool	pipex_init(t_variables *pipex, int argc, char **argv, char **envp)
 	pipex->child_pids = NULL;
 	pipex->exitcode = EXIT_SUCCESS;
 	pipex->heredoc = false;
-	if (ft_strncmp(pipex->argv[1], "here_doc", 9) == 0
-		&& ft_strncmp(pipex->argv[0], "./pipex_bonus", 14) == 0)
-		pipex->heredoc = true;
-	pipex->size = argc - 3 - pipex->heredoc;
+	pipex->size = argc - 3;
 	if (!init_cmds(pipex))
 		return (false);
 	return (true);

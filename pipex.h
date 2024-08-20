@@ -6,48 +6,93 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:42:23 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/13 10:06:31 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:05:34 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <sys/wait.h>
+# include "libft/libft.h"
 
-# include "./libft/libft.h"
+# include <fcntl.h>		//open, close, read, write
+# include <stdlib.h>	//malloc, free
+# include <stdio.h>		//perror
+# include <string.h>	//strerror
+# include <unistd.h>	//access, dup, dup2, execve, exit, fork, pipe, unlink
+# include <sys/wait.h>	//wait, waitpid
+# include <stdbool.h>	//true, false
+# include <errno.h>		//errno
+# include <error.h>
+
+# define ERR_ARG_1 	"Error: Wrong number of arguments\n"
+# define ERR_ARG_2 	"Error: Not enough arguments\n"
+# define ERR_IN 	"Error: infile undefined\n"
+# define ERR_OUT	"Error: outfile undefined\n"
+
+typedef struct s_cmd
+{
+	bool	found;
+	char	*path;
+	char	**args;
+}	t_cmd;
 
 typedef struct s_variables
 {
-	int	f1;
-	int	f2;
-	int	a;
-	int	infile;
-	int	outfile;
-	int	fd[2];
-	int	cc;
+	int		size;
+	int		infile;
+	int		outfile;
+	t_cmd	*cmds;
+	int		**pipes;
+	char	**paths;
+	char	**argv;
+	char	**envp;
+	int		*child_pids;
+	bool	heredoc;
+	int		exitcode;
 }				t_variables;
 
-// void	ft_error_msg(char *msg, int exit_code);
-void	ft_error_msg(char *msg, int exit_code, t_variables *variables);
+//child.c
 
+void	redirect(t_variables pipex, int input, int output);
+void	children(t_variables pipex, int i);
+void	child(t_variables pipex, int i, int input, int output);
 
-char	*path_finder(char **env);
-// char	*true_path(char *argv, char **env);
-char	*true_path(char *cmd, char **envp);
-void	close_2(int first, int second);
-void	close_all(t_variables *variables);
-void	fn_path(char **res_split, char *argv);
-// void	ft_exec(char **argv, char **args, char **env, int i);
-void	piping_m(t_variables *variables, char **argv, char **env, int i);
-//void	dup2_2(int first, int second, int third, int fourth);
-void	size_check(int argc);
-void	open_files(t_variables *variables, char **argv, int argc);
-// void	ft_free_split(char **split);
-void	ft_pipe(int *fd, t_variables *variables);
+//error.c
+
+void	error_message(char *file);
+void	cmd_not_found(t_variables *pipex, int i);
+
+//free.c
+
+bool	close_all_fds(t_variables *pipex);
+bool	free_pipex(t_variables *pipex);
+bool	free_array(char **array);
+
+//here_doc_bonus.c
+
+void	open_here_doc(t_variables *pipex);
+void	here_doc(t_variables *pipex);
+
+//main.c or main_bonus.c
+
+int		main(int argc, char **argv, char **envp);
+bool	pipex_init(t_variables *pipex, int argc, char **argv, char **envp);
+bool	init_cmds(t_variables *pipex);
+
+//parse.c
+
+bool	is_command(t_variables *pipex, char *command, int i);
+void	find_command(t_variables *pipex, int i);
+void	find_paths(t_variables *pipex);
+void	open_files(t_variables *pipex);
+bool	parse_input(t_variables *pipex);
+
+//pipex.c
+
+bool	create_pipes(t_variables *pipex);
+bool	wait_pids(t_variables *pipex);
+bool	allocate_pids(t_variables *pipex);
+bool	execute(t_variables *pipex);
 
 #endif

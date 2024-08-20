@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:51:15 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/08 06:58:35 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:46:38 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,15 @@
 #  define BUFFER_SIZE 1042
 # endif
 
-void	ft_error(void);
-void	ft_putstr_fd(char *s, int fd);
-//void	ft_error_msg(char *msg, int exit_code);
-char	*ft_substr(char const *s, int start, int len);
-int		count_words(char const *s, char c);
-char	**main_split(char const *s, char c);
-// char	**ft_split(char const *s, char c);
-char	**ft_split_b(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
+void	ft_putstr_fd(char *s, int fd);
+char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s1);
 char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strlen(const char *str);
-int		ft_strncmp(const char *s1, const char *s2, int n);
+char	*ft_strjoin3(char const *s1, char const *s2, char const *s3);
+char	*ft_strlwr(char *str);
+size_t	ft_strlen(const char *s);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strchr_gnl(char const *string, int c);
 char	*ft_strdup_gnl(char const *s);
 char	*ft_strjoin_gnl(char const *s1, char const *s2);

@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:46:30 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/20 15:59:40 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:29:37 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	here_doc(t_variables *pipex)
 {
 	char	*buf;
 
-	while (1)
+	while (42)
 	{
-		write(1, "pipex heredoc> ", 15);
+		write(1, " > ", 3);
 		buf = get_next_line(STDIN_FILENO);
 		if (buf == NULL || *buf == '\0')
 		{

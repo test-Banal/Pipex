@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:42:23 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/20 15:05:34 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:11:39 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 # include "libft/libft.h"
 
-# include <fcntl.h>		//open, close, read, write
-# include <stdlib.h>	//malloc, free
-# include <stdio.h>		//perror
-# include <string.h>	//strerror
-# include <unistd.h>	//access, dup, dup2, execve, exit, fork, pipe, unlink
-# include <sys/wait.h>	//wait, waitpid
-# include <stdbool.h>	//true, false
-# include <errno.h>		//errno
+# include <fcntl.h>		
+# include <stdlib.h>	
+# include <stdio.h>		
+# include <string.h>	
+# include <unistd.h>	
+# include <sys/wait.h>	
+# include <stdbool.h>	
+# include <errno.h>		
 # include <error.h>
 
 # define ERR_ARG_1 	"Error: Wrong number of arguments\n"
@@ -52,43 +52,30 @@ typedef struct s_variables
 	int		exitcode;
 }				t_variables;
 
-//child.c
 
 void	redirect(t_variables pipex, int input, int output);
 void	children(t_variables pipex, int i);
 void	child(t_variables pipex, int i, int input, int output);
 
-//error.c
-
 void	error_message(char *file);
 void	cmd_not_found(t_variables *pipex, int i);
-
-//free.c
 
 bool	close_all_fds(t_variables *pipex);
 bool	free_pipex(t_variables *pipex);
 bool	free_array(char **array);
 
-//here_doc_bonus.c
-
 void	open_here_doc(t_variables *pipex);
 void	here_doc(t_variables *pipex);
-
-//main.c or main_bonus.c
 
 int		main(int argc, char **argv, char **envp);
 bool	pipex_init(t_variables *pipex, int argc, char **argv, char **envp);
 bool	init_cmds(t_variables *pipex);
-
-//parse.c
 
 bool	is_command(t_variables *pipex, char *command, int i);
 void	find_command(t_variables *pipex, int i);
 void	find_paths(t_variables *pipex);
 void	open_files(t_variables *pipex);
 bool	parse_input(t_variables *pipex);
-
-//pipex.c
 
 bool	create_pipes(t_variables *pipex);
 bool	wait_pids(t_variables *pipex);

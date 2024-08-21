@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:53 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/20 16:00:42 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:16:57 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	find_command(t_variables *pipex, int i)
 		return ;
 	j = 0;
 	if (!pipex->paths)
-		return (cmd_not_found(pipex, i));
+		return (ft_cmd_not_found(pipex, i));
 	while (pipex->paths[j])
 	{
 		command = ft_strjoin3(pipex->paths[j],
@@ -48,11 +48,11 @@ void	find_command(t_variables *pipex, int i)
 			break ;
 		j++;
 		if (!pipex->paths[j])
-			cmd_not_found(pipex, i);
+			ft_cmd_not_found(pipex, i);
 	}
 }
 
-void	find_paths(t_variables *pipex)
+void	ft_find_path(t_variables *pipex)
 {
 	int	i;
 
@@ -69,30 +69,18 @@ void	open_files(t_variables *pipex)
 {
 	pipex->infile = open(pipex->argv[1], O_RDONLY);
 	if (pipex->infile == -1)
-	{
-		if (access(pipex->argv[1], F_OK) != 0)
-			error_message(pipex->argv[1]);
-		else if (access(pipex->argv[1], R_OK) != 0)
-			error_message(pipex->argv[1]);
-		else
-			ft_putstr_fd(ERR_IN, 2);
-	}
+		ft_putstr_fd(ERR_IN, 2);
 	pipex->outfile = open(pipex->argv[pipex->size + 2],
 			O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (pipex->outfile == -1)
-	{
-		if (access(pipex->argv[pipex->size + 2], W_OK) != 0)
-			error_message(pipex->argv[pipex->size + 2]);
-		else
-			ft_putstr_fd(ERR_OUT, 2);
-	}
+		ft_putstr_fd(ERR_OUT, 2);
 }
 
 bool	parse_input(t_variables *pipex)
 {
 	int	i;
 
-	find_paths(pipex);
+	ft_find_path(pipex);
 	if (pipex->heredoc)
 		open_here_doc(pipex);
 	else

@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 15:58:53 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/20 15:58:59 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:19:49 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,22 @@ int	main(int argc, char **argv, char **envp)
 		ft_putstr_fd(ERR_ARG_1, 2);
 		return (EXIT_FAILURE);
 	}
-	if (!pipex_init(&pipex, argc, argv, envp))
-		return (free_pipex(&pipex), error_message(NULL), EXIT_FAILURE);
+	if (!ft_init(&pipex, argc, argv, envp))
+		return (free_pipex(&pipex), \
+			ft_putstr_fd("Error init\n", 2), EXIT_FAILURE);
 	if (!parse_input(&pipex))
 		return (free_pipex(&pipex), EXIT_FAILURE);
-	if (!create_pipes(&pipex))
-		return (free_pipex(&pipex), error_message(NULL), EXIT_FAILURE);
-	if (!execute(&pipex))
-		return (free_pipex(&pipex), error_message(NULL), pipex.exitcode);
+	if (!ft_create_pipes(&pipex))
+		return (free_pipex(&pipex), \
+			ft_putstr_fd("Error pipe\n", 2), EXIT_FAILURE);
+	if (!ft_execute(&pipex))
+		return (free_pipex(&pipex), \
+			ft_putstr_fd("Error\n", 2), pipex.exitcode);
 	free_pipex(&pipex);
 	return (pipex.exitcode);
 }
 
-bool	pipex_init(t_variables *pipex, int argc, char **argv, char **envp)
+bool	ft_init(t_variables *pipex, int argc, char **argv, char **envp)
 {
 	pipex->paths = NULL;
 	pipex->infile = -1;
@@ -46,12 +49,12 @@ bool	pipex_init(t_variables *pipex, int argc, char **argv, char **envp)
 	pipex->exitcode = EXIT_SUCCESS;
 	pipex->heredoc = false;
 	pipex->size = argc - 3;
-	if (!init_cmds(pipex))
+	if (!ft_init_cmds(pipex))
 		return (false);
 	return (true);
 }
 
-bool	init_cmds(t_variables *pipex)
+bool	ft_init_cmds(t_variables *pipex)
 {
 	int	i;
 

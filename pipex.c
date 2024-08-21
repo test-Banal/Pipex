@@ -6,13 +6,13 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:17 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/20 15:58:33 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:58:34 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-bool	create_pipes(t_variables *pipex)
+bool	ft_create_pipes(t_variables *pipex)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ bool	create_pipes(t_variables *pipex)
 	return (true);
 }
 
-bool	wait_pids(t_variables *pipex)
+bool	ft_wait_pids(t_variables *pipex)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ bool	wait_pids(t_variables *pipex)
 	return (true);
 }
 
-bool	allocate_pids(t_variables *pipex)
+bool	ft_allocate_pids(t_variables *pipex)
 {
 	int	i;
 
@@ -67,26 +67,26 @@ bool	allocate_pids(t_variables *pipex)
 	return (true);
 }
 
-bool	execute(t_variables *pipex)
+bool	ft_execute(t_variables *pipex)
 {
 	int	pid;
 	int	i;
 
-	if (!allocate_pids(pipex))
+	if (!ft_allocate_pids(pipex))
 		return (false);
 	i = 0;
 	while (i < pipex->size)
 	{
 		pid = fork();
 		if (pid == 0)
-			children(*pipex, i);
+			ft_children(*pipex, i);
 		else if (pid > 0)
 			pipex->child_pids[i] = pid;
 		else
-			return (close_all_fds(pipex), false);
+			return (ft_close_all_fds(pipex), false);
 		i++;
 	}
-	close_all_fds(pipex);
-	wait_pids(pipex);
+	ft_close_all_fds(pipex);
+	ft_wait_pids(pipex);
 	return (true);
 }

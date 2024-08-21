@@ -6,13 +6,13 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 15:58:41 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/20 15:58:43 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:16:37 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	cmd_not_found(t_variables *pipex, int i)
+void	ft_cmd_not_found(t_variables *pipex, int i)
 {
 	ft_putstr_fd("pipex: command not found: ", 2);
 	ft_putstr_fd(pipex->cmds[i].args[0], 2);
@@ -20,28 +20,7 @@ void	cmd_not_found(t_variables *pipex, int i)
 	pipex->cmds[i].found = false;
 }
 
-void	error_message(char *file)
-{
-	char	*message;
-
-	ft_putstr_fd("pipex: ", 2);
-	message = ft_strdup(strerror(errno));
-	message = ft_strlwr(message);
-	if (message)
-		ft_putstr_fd(message, 2);
-	else
-		ft_putstr_fd("error allocating error_message", 2);
-	if (file)
-	{
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(file, 2);
-	}
-	ft_putstr_fd("\n", 2);
-	if (message)
-		free(message);
-}
-
-bool	close_all_fds(t_variables *pipex)
+bool	ft_close_all_fds(t_variables *pipex)
 {
 	int	i;
 

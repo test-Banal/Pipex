@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:42:23 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/21 16:17:11 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:40:27 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define ERR_ARG_2 	"Error: Not enough arguments\n"
 # define ERR_IN 	"Error: infile\n"
 # define ERR_OUT	"Error: outfile\n"
+# define ERR_HEREDOC	"Error: here_doc\n"
 
 typedef struct s_cmd
 {

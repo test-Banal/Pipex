@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:46:30 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/21 16:41:06 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:40:50 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ void	here_doc(t_variables *pipex)
 		{
 			write(1, "\n", 1);
 			write(1, "pipex: warning - file delimited by end-of-file ", 47);
-			write(1, "(wanted \"", 9);
 			write(1, pipex->argv[2], ft_strlen(pipex->argv[2]));
-			write(1, "\")\n", 3);
+			write(1, "\n", 1);
 			break ;
 		}
 		if (ft_strlen(pipex->argv[2]) == ft_strlen(buf) - 1 && \
@@ -43,17 +42,17 @@ void	open_here_doc(t_variables *pipex)
 {
 	pipex->infile = open(".here_doc", O_CREAT | O_WRONLY | O_TRUNC, 0000644);
 	if (pipex->infile == -1)
-		ft_putstr_fd("Error: here_doc\n", 2);
+		ft_putstr_fd(ERR_HEREDOC, 2);
 	here_doc(pipex);
 	close(pipex->infile);
 	pipex->infile = open(".here_doc", O_RDONLY);
 	if (pipex->infile == -1)
 	{
 		unlink(".here_doc");
-		ft_putstr_fd("Error: here_doc\n", 2);
+		ft_putstr_fd(ERR_HEREDOC, 2);
 	}
 	pipex->outfile = open(pipex->argv[pipex->size + 3],
 			O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (pipex->outfile == -1)
-			ft_putstr_fd("Error: outfile undefined\n", 2);
+		ft_putstr_fd(ERR_OUT, 2);
 }

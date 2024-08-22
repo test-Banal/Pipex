@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:53 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/21 16:16:57 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:47:09 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ bool	is_command(t_variables *pipex, char *command, int i)
 {
 	if (!command)
 		return (false);
+	printf("is_command command: %s\n", command);
 	if (access(command, F_OK) == 0 && ft_strncmp(command, "/", 1) == 0)
 	{
 		pipex->cmds[i].path = ft_strdup(command);
@@ -44,6 +45,7 @@ void	find_command(t_variables *pipex, int i)
 	{
 		command = ft_strjoin3(pipex->paths[j],
 				"/", pipex->cmds[i].args[0]);
+		printf("command: %s\n", command);
 		if (is_command(pipex, command, i))
 			break ;
 		j++;

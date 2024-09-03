@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:47:17 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/21 15:58:34 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:25:00 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ bool	ft_create_pipes(t_variables *pipex)
 bool	ft_wait_pids(t_variables *pipex)
 {
 	int	i;
+	int	status;
 
 	i = 0;
 	while (i < pipex->size && pipex->child_pids[i] > 0)
 	{
-		waitpid(pipex->child_pids[i], NULL, 0);
+		waitpid(pipex->child_pids[i], &status, 0);
 		i++;
 	}
 	if (pipex->outfile == -1)
@@ -47,7 +48,7 @@ bool	ft_wait_pids(t_variables *pipex)
 	else if (!pipex->cmds[i - 1].found)
 		pipex->exitcode = 127;
 	else
-		pipex->exitcode = 0;
+		pipex->exitcode = WEXITSTATUS(status);
 	return (true);
 }
 

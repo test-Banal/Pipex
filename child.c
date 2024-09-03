@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:00:55 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/21 15:51:12 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:51:50 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,31 @@ void	ft_child(t_variables pipex, int i, int input, int output)
 {
 	ft_redirect(pipex, input, output);
 	ft_close_all_fds(&pipex);
+	// 	printf("la	\n");
+	// fflush(stdout);  // Force l'affichage immédiat
+
+	// printf("path: %s\n", pipex.cmds[i].path);
+	// fflush(stdout);
+
+	// int j = 0;
+	// while (pipex.cmds[i].args[j])
+	// {
+	// 	printf("args[%d]: %s\n", j, pipex.cmds[i].args[j]);
+	// 	fflush(stdout);
+	// 	j++;
+	// }
+
+	// j = 0;
+	// while (pipex.envp[j])
+	// {
+	// 	printf("envp[%d]: %s\n", j, pipex.envp[j]);
+	// 	fflush(stdout);
+	// 	j++;
+	// }
 	if (execve(pipex.cmds[i].path, pipex.cmds[i].args, pipex.envp) == -1)
 	{
 		free_pipex(&pipex);
 		ft_putstr_fd("Error execve\n", 2);
+		exit(1);
 	}
-	exit(1);
 }

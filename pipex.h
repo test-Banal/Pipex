@@ -6,7 +6,7 @@
 /*   By: aneumann <aneumann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:42:23 by aneumann          #+#    #+#             */
-/*   Updated: 2024/08/22 14:40:27 by aneumann         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:33:00 by aneumann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 # include "libft/libft.h"
 
 # include <fcntl.h>		
-# include <stdlib.h>	
-# include <stdio.h>		
+# include <stdlib.h>	//
+# include <stdio.h>		//
 # include <string.h>	
-# include <unistd.h>	
-# include <sys/wait.h>	
-# include <stdbool.h>	
+# include <unistd.h>	//
+# include <sys/wait.h>	//
+# include <stdbool.h>	//
 # include <errno.h>		
 # include <error.h>
 

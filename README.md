@@ -42,7 +42,7 @@ Understanding low-level process execution
 Installation
 
 ## Clone the repository:
-git clone https://github.com/yourusername/pipex.git
+git clone
 cd pipex
 Compile the project:
 make
